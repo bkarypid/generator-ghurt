@@ -12,18 +12,21 @@
 
 	<body>
 		
-		
+		<% if (_hasNgDepend('angular-route')) { %>
 		<!-- ng-view for main content -->
 		<div class="row" ng-include=" 'app/content/header/header.view.html' "></div>
 		<div class="row" ng-include=" 'app/content/navigation/navigation.view.html' "></div>
 		<!-- ng-view for main content -->
 		<div class="row">
-			<div class="large-8 medium-10 medium-centered columns wrappe">
+			<div class="large-8 medium-10 medium-centered columns wrapper">
 				<div class="row" ng-view=""></div>
 			</div>
 		</div>
 		<div class="row footer" ng-include=" 'app/content/footer/footer.view.html' "></div>
-
+		<% } else { %>
+		<!-- ng-include for main controller -->
+		<div ng-controller="AppCtrl" ng-include="templateUrl"></div>
+		<% } %>
 
 		<!-------------------------------- Scripts --------------------------------------------->
 
