@@ -1,7 +1,7 @@
 {
-  "name": "generator-ghurt",
+  "name": "generator-benefits",
   "version": "0.4.1",
-  "description": "A Yeoman generator for AngularJS + HapiJS stack",
+  "description": "A Yeoman generator for AngularJS + HapiJS stack to initialize demonstrators",
   "keywords": [
     "yeoman-generator",
     "angular",
