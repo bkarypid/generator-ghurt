@@ -19,7 +19,7 @@ var generatorData = {
 
 	extDependencies: {
 		'jquery' : {
-			scriptDir: 'vendor/jquery/jquery.min.js',
+			scriptDir: 'vendor/jquery/dist/jquery.js',
 			objectName: '$'
 		},
 		'moment' : {
@@ -29,6 +29,9 @@ var generatorData = {
 		'd3' : {
 			scriptDir: 'vendor/d3/d3.min.js',
 			objectName: 'd3'
+		},
+		'foundation' : {
+			scriptDir: 'vendor/foundation/js/foundation.min.js'
 		}
 	},
 
@@ -47,11 +50,13 @@ var generatorData = {
 		ngDependencies: {
 			ngVersion: 'latest',
 			ngDepend: [
-				'angular-route'
+				'angular-route', 'angular-animate'
 			]
 		},
 		extDependencies: {
-			extDepend: []
+			extDepend: [
+				'jquery', 'foundation'
+			]
 		},
 		fdnSettings: {
 			isRequired: true,

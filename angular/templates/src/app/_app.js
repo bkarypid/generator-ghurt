@@ -1,20 +1,20 @@
 'use strict';
 
-angular.module('app', ['templates', 'common'<%= _.map(ngDependencies.ngDepend, function (dep) { return ", '"+_ngDepend[dep].moduleName+"'"; }).join('') %>])<% 
+angular.module('app', ['templates', 'common'<%= _.map(ngDependencies.ngDepend, function (dep) { return ", '"+_ngDepend[dep].moduleName+"'"; }).join('') %>, 'content'])<% 
 	if (_hasNgDepend('angular-route')) { %>
 	.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: 'app/app.view.html',
-				controller: 'AppCtrl'
+				templateUrl: 'app/content/partials/main/main.view.html',
+				controller: 'MainCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'
 			});
 		$locationProvider.html5Mode(true);
 	}])<% } %>
-	.controller('AppCtrl', ['$scope', function ($scope) {
-			$scope.message = 'Hello World';
-			$scope.templateUrl = 'app/app.view.html';
-		}
-	]);
+	.run(['$rootScope', function ($rootScope) {
+	$rootScope.$on('$viewContentLoaded', function () {
+		$(document).foundation('reflow');
+	});
+}]);

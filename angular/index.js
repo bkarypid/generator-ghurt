@@ -263,24 +263,24 @@ NgcapGenerator.prototype.askExternalDependencies = function askExternalDependenc
  * A prompt to force people not to install jQuery when they use Angular
  * Just a joke ... Nothing to see here! Move on!
  */
-NgcapGenerator.prototype.jqueryAlert = function jqueryAlert() {
-	var cb = this.async();
+// NgcapGenerator.prototype.jqueryAlert = function jqueryAlert() {
+// 	var cb = this.async();
 
-	if (this._hasExtDepend('jquery')) {
-		console.log('\rReally? Angular with Jquery? You better know what you are doing... :-P');
-		var prompts = [{
-			type: 'input',
-			name: 'jqueryExcuse',
-			message: 'Please write your excuse here'
-		}];
-		this.prompt(prompts, function () {
-			cb();
-		}.bind(this));
-	}
-	else {
-		cb();
-	}
-};
+// 	if (this._hasExtDepend('jquery')) {
+// 		console.log('\rReally? Angular with Jquery? You better know what you are doing... :-P');
+// 		var prompts = [{
+// 			type: 'input',
+// 			name: 'jqueryExcuse',
+// 			message: 'Please write your excuse here'
+// 		}];
+// 		this.prompt(prompts, function () {
+// 			cb();
+// 		}.bind(this));
+// 	}
+// 	else {
+// 		cb();
+// 	}
+// };
 
 /**
  * askFoundation
@@ -349,9 +349,19 @@ NgcapGenerator.prototype.bowerDependencies = function bowerDependencies() {
 NgcapGenerator.prototype.createStructure = function createStructure() {
 	this.mkdir('src');
 	this.mkdir('src/app');
+	this.mkdir('src/app/content');
+	this.mkdir('src/app/content/header');
+	this.mkdir('src/app/content/navigation');
+	this.mkdir('src/app/content/partials');
+	this.mkdir('src/app/content/partials/main');
+	this.mkdir('src/app/content/footer');
 	this.mkdir('src/app/common');
+	this.mkdir('src/app/common/directives');
+	this.mkdir('src/app/common/services');
 	this.mkdir('src/styles');
 	this.mkdir('src/styles/scss');
+	this.mkdir('src/styles/scss/content');
+	this.mkdir('src/styles/scss/content/partials');
 	this.mkdir('test');
 	this.mkdir('test/config');
 	this.mkdir('test/unit');
@@ -389,8 +399,13 @@ NgcapGenerator.prototype.srcFolderInit = function srcFolderInit() {
 	this.template('src/app/_app.view.html', 'src/app/app.view.html');
 	this.template('src/app/_dependencies.js', 'src/app/common/dependencies.js');
 	this.copy('src/app/common.js', 'src/app/common/common.js');
+	this.copy('src/app/directives.js', 'src/app/common/directives/directives.js');
+	this.copy('src/app/services.js', 'src/app/common/services/services.js');
+	this.directory('src/app/content/', 'src/app/content/');
 
 	this.copy('src/styles/config.rb', 'src/styles/config.rb');
+	this.copy('src/styles/master.scss', 'src/styles/scss/master.scss');
+	this.directory('src/styles/content/', 'src/styles/scss/content/');
 
 	// Add this only if Foundation is required to be installed
 	if (this.fdnSettings.isRequired) {
@@ -407,6 +422,7 @@ NgcapGenerator.prototype.srcFolderInit = function srcFolderInit() {
 NgcapGenerator.prototype.testFolderInit = function testFolderInit() {
 	this.template('test/_karma.conf.js', 'test/config/karma.conf.js');
 	this.copy('test/protractorConf.js', 'test/config/protractorConf.js');
+	this.directory('test/unit/', 'test/unit');
 };
 
 /**
